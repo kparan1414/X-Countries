@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./App.module.css";
+import "./App.css";
 import axios from "axios";
 
 function App() {
@@ -8,10 +8,9 @@ function App() {
 
   // Search feature
   const searchCountry = (text) => {
-    let n = text.length;
-    if (n !== 0) {
+    if (text) {
       let arr = countries.filter((country) => {
-        return country.name.common.substring(0, n) === text;
+        return country.name.common.toLowerCase().includes(text.toLowerCase());
       });
       setCountries(arr);
     }
@@ -69,7 +68,7 @@ function App() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className="container">
       <input
         type="text"
         placeholder="Search for countries"
@@ -81,7 +80,7 @@ function App() {
       />
       <div style={wrapper}>
         {countries.map((country) => (
-          <div className={styles.countryCard} key={country.name.common}>
+          <div className="countryCard" key={country.name.common}>
             <img
               style={image}
               src={country.flags.png}
